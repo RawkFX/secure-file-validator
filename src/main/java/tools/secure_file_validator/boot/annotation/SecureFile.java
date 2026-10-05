@@ -1,0 +1,39 @@
+package tools.secure_file_validator.boot.annotation;
+
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+import tools.secure_file_validator.boot.validator.SecureFileValidator;
+
+import java.lang.annotation.*;
+
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+@Constraint(validatedBy = SecureFileValidator.class)
+@Documented
+public @interface SecureFile {
+    boolean required() default true;
+
+    String message() default "Invalid file.";
+
+    long maxSizeMb() default 50;
+
+    String[] allowedMimeTypes() default {};
+
+    String[] allowedExtensions() default {};
+
+    String requiredMessage() default "";
+
+    String unsafeFilenameMessage() default "";
+
+    String emptyMessage() default "";
+
+    String tooLargeMessage() default "";
+
+    String invalidMimeTypeMessage() default "";
+
+    String invalidExtensionMessage() default "";
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
+}
