@@ -23,22 +23,24 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tools.secure_file_validator.boot.annotation.SecureFile;
 
-public class UploadRequest {
-
+public class UploadRequestDTO {
     @SecureFile(
-        required = true,
         maxSizeMb = 10,
         allowedMimeTypes = {"image/png", "application/pdf"},
         allowedExtensions = {"png", "pdf"}
     )
     private MultipartFile file;
+    
+    private List<@SecureFile(
+                maxSizeMb = 5, 
+                allowedMimeTypes = {"image/jpeg"}, 
+                allowedExtensions = {"jpg", "jpeg"}) MultipartFile> additionalFiles;
 }
 
 @RestController
 public class UploadController {
-
     @PostMapping("/upload")
-    public String upload(@Valid @ModelAttribute UploadRequest request) {
+    public String upload(@Valid @ModelAttribute UploadRequestDTO request) {
         return "OK";
     }
 }
