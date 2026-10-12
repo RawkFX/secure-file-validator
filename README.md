@@ -21,7 +21,7 @@ Example usage
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import tools.secure_file_validator.boot.annotation.SecureFile;
+import annotation.io.github.rawkfx.secure-file-validator.SecureFile;
 
 public class UploadRequestDTO {
     @SecureFile(

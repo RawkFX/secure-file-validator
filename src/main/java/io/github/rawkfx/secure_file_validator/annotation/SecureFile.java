@@ -1,8 +1,8 @@
-package tools.secure_file_validator.boot.annotation;
+package io.github.rawkfx.secure_file_validator.annotation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import tools.secure_file_validator.boot.validator.SecureFileValidator;
+import io.github.rawkfx.secure_file_validator.validator.SecureFileValidator;
 
 import java.lang.annotation.*;
 
