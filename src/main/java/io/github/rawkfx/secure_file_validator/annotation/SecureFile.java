@@ -1,6 +1,6 @@
-package tools.secure_file_validator.boot.annotation;
+package io.github.rawkfx.secure_file_validator.annotation;
 
-import tools.secure_file_validator.boot.validator.SecureFileValidator;
+import io.github.rawkfx.secure_file_validator.validator.SecureFileValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
