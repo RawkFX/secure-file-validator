@@ -1,4 +1,4 @@
-package tools.secure_file_validator.boot.config;
+package io.github.rawkfx.secure_file_validator.config;
 
 import org.apache.tika.Tika;
 import org.springframework.context.annotation.Bean;

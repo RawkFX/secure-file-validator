@@ -8,9 +8,9 @@
 		<version>4.1.1</version>
 		<relativePath/>
 	</parent>
-	<groupId>tools.secure_file_validator</groupId>
-	<artifactId>boot</artifactId>
-	<version>4.1.1-RC1</version>
+	<groupId>io.github.rawkfx</groupId>
+	<artifactId>secure-file-validator</artifactId>
+	<version>4.1.1-RC1.1</version>
 	<name>Secure File Validator</name>
 	<description>A tool for validating the uploaded files integrity.</description>
 	<properties>

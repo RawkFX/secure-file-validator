@@ -1,4 +1,4 @@
-package tools.secure_file_validator.boot;
+package io.github.rawkfx.secure_file_validator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

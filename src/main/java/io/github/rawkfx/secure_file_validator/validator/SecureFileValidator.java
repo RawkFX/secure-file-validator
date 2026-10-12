@@ -1,4 +1,4 @@
-package tools.secure_file_validator.boot.validator;
+package io.github.rawkfx.secure_file_validator.validator;
 
 
 import jakarta.validation.ConstraintValidator;
@@ -7,8 +7,8 @@ import org.apache.tika.Tika;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import tools.secure_file_validator.boot.annotation.SecureFile;
-import tools.secure_file_validator.boot.properties.SecureFileValidatorProperties;
+import io.github.rawkfx.secure_file_validator.annotation.SecureFile;
+import io.github.rawkfx.secure_file_validator.properties.SecureFileValidatorProperties;
 
 import java.io.InputStream;
 
