@@ -8,8 +8,8 @@
 		<version>2.7.18</version>
 		<relativePath/>
 	</parent>
-	<groupId>tools.secure_file_validator</groupId>
-	<artifactId>boot</artifactId>
+	<groupId>io.github.rawkfx</groupId>
+	<artifactId>secure-file-validator</artifactId>
 	<version>2.7.18-RC1</version>
 	<name>Secure File Validator</name>
 	<description>A tool for validating the uploaded files integrity.</description>

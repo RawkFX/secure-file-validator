@@ -1,4 +1,4 @@
-package tools.secure_file_validator.boot.properties;
+package io.github.rawkfx.secure_file_validator.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
