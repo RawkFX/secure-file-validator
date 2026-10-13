@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.github.rawkfx.secure_file_validator.config.SecureFileAutoConfiguration
