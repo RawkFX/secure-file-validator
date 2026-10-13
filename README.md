@@ -24,6 +24,7 @@ Example usage
 
 ```java
 import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import io.github.rawkfx.secure_file_validator.annotation.SecureFile;
@@ -36,6 +37,7 @@ public class UploadRequestDTO {
     )
     private MultipartFile file;
 
+    // Example of a list of files with the same validation rules
     private List<@SecureFile(
             maxSize = 5,
             allowedMimeTypes = {"image/jpeg"},
@@ -43,6 +45,7 @@ public class UploadRequestDTO {
 }
 
 @RestController
+@Validated
 public class UploadController {
     @PostMapping("/upload")
     public String upload(@Valid @ModelAttribute UploadRequestDTO request) {
