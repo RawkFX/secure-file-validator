@@ -1,14 +1,13 @@
 package io.github.rawkfx.secure_file_validator.validator;
 
-
+import io.github.rawkfx.secure_file_validator.annotation.SecureFile;
+import io.github.rawkfx.secure_file_validator.exception.SecureFileValidationException;
+import io.github.rawkfx.secure_file_validator.properties.SecureFileValidatorProperties;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.apache.tika.Tika;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import io.github.rawkfx.secure_file_validator.annotation.SecureFile;
-import io.github.rawkfx.secure_file_validator.properties.SecureFileValidatorProperties;
 
 import java.io.InputStream;
 
@@ -16,8 +15,9 @@ import java.io.InputStream;
  * Validator for the @SecureFile annotation. Validates the uploaded file based on size, MIME type, and extension.
  * It uses Apache Tika to detect the MIME type of the file.
  * The validation messages can be customized through the annotation or application properties.
+ * <p>
+ * Failures are handled by throwing SecureFileValidationException to short-circuit processing.
  */
-@Component
 public class SecureFileValidator implements ConstraintValidator<SecureFile, MultipartFile> {
     private final Tika tika;
     private final SecureFileValidatorProperties properties;
@@ -39,168 +39,133 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
         boolean isNull = (file == null);
         boolean isEmpty = (!isNull && file.isEmpty());
 
-        if(isNull || isEmpty) {
-            return this.handleMissingFile(constraintValidatorContext, isNull);
+        if (isNull || isEmpty) {
+            this.handleMissingFile(isNull);
+
+            // If it doesn't throw an exception, it means required() is false
+            return true;
         }
 
-        if (!this.isSafeFilename(file, constraintValidatorContext, this.resolveMessage(annotation.unsafeFilenameMessage(), properties.getMessages().getUnsafeFilenameMessage()))) {
-            return false;
-        }
+        this.validateSafeFilename(file);
+        this.validateSize(file);
+        this.validateMimeType(file);
+        this.validateExtension(file);
 
-        if (!this.isValidSize(file, constraintValidatorContext, annotation.maxSizeMb(), this.resolveMessage(annotation.tooLargeMessage(), properties.getMessages().getTooLarge()))) {
-            return false;
-        }
-
-        if (!this.isValidMimeType(file, constraintValidatorContext, annotation.allowedMimeTypes(), this.resolveMessage(annotation.invalidMimeTypeMessage(), properties.getMessages().getInvalidMimeType()))) {
-            return false;
-        }
-
-        if (!this.isValidExtension(file, constraintValidatorContext, annotation.allowedExtensions(), this.resolveMessage(annotation.invalidExtensionMessage(), properties.getMessages().getInvalidExtension()))) {
-            return false;
-        }
-
+        // If no exceptions were thrown during the checks, the file is valid
         return true;
     }
 
     /**
      * Handles the scenario where the file is either null or empty.
-     * If the file is not required, it passes validation.
-     * If it is required, it resolves the specific violation message and fails validation.
+     * If it is required, it resolves the specific violation message and throws an exception.
      *
-     * @param context represents the context in which the validation is being performed.
-     * @return true if the missing file is optional, false if it is required.
+     * @param isNull true if the file is completely null, false if it is just empty.
      */
-    private boolean handleMissingFile(ConstraintValidatorContext context, boolean isNull) {
+    private void handleMissingFile(boolean isNull) {
         if (!annotation.required()) {
-            return true;
+            return;
         }
 
         String message = (isNull)
                 ? this.resolveMessage(annotation.requiredMessage(), properties.getMessages().getRequired())
                 : this.resolveMessage(annotation.emptyMessage(), properties.getMessages().getEmpty());
 
-        return this.addViolation(context, message);
+        throw new SecureFileValidationException(message);
     }
 
     /**
      * Validates the size of the uploaded file against the maximum allowed size.
      *
-     * @param file      represents the uploaded file to be validated.
-     * @param context   represents the context in which the validation is being performed.
-     * @param maxSizeMb represents the maximum allowed size of the file in megabytes.
-     * @param message   represents the message to be displayed if the file size exceeds the maximum allowed size.
-     * @return true if the file size is valid, false otherwise.
+     * @param file represents the uploaded file to be validated.
      */
-    private boolean isValidSize(MultipartFile file, ConstraintValidatorContext context, long maxSizeMb, String message) {
-        long maxSizeBytes = maxSizeMb * 1024 * 1024;
+    private void validateSize(MultipartFile file) {
+        long maxSizeBytes = annotation.maxSize() * 1024 * 1024;
 
         if (file.getSize() > maxSizeBytes) {
-            return this.addViolation(context, message);
+            String message = this.resolveMessage(annotation.tooLargeMessage(), properties.getMessages().getTooLarge());
+            throw new SecureFileValidationException(message);
         }
-
-        return true;
     }
 
     /**
      * Validates the MIME type of the uploaded file against the allowed MIME types.
      *
-     * @param file             represents the uploaded file to be validated.
-     * @param context          represents the context in which the validation is being performed.
-     * @param allowedMimeTypes represents the array of allowed MIME types for the file.
-     * @param message          represents the message to be displayed if the file's MIME type is not allowed.
-     * @return true if the file's MIME type is valid, false otherwise.
+     * @param file represents the uploaded file to be validated.
      */
-    private boolean isValidMimeType(MultipartFile file, ConstraintValidatorContext context, String[] allowedMimeTypes, String message) {
+    private void validateMimeType(MultipartFile file) {
+        String[] allowedMimeTypes = annotation.allowedMimeTypes();
         if (allowedMimeTypes == null || allowedMimeTypes.length == 0) {
-            return true;
+            return;
         }
+
+        String message = this.resolveMessage(annotation.invalidMimeTypeMessage(), properties.getMessages().getInvalidMimeType());
 
         try (InputStream inputStream = file.getInputStream()) {
             String mimeType = tika.detect(inputStream);
 
             for (String allowedMimeType : allowedMimeTypes) {
                 if (allowedMimeType.equalsIgnoreCase(mimeType)) {
-                    return true;
+                    return;
                 }
             }
 
-            return this.addViolation(context, message);
+            throw new SecureFileValidationException(message);
         } catch (Exception e) {
-            return this.addViolation(context, message);
+            throw new SecureFileValidationException(message);
         }
     }
 
     /**
      * Checks if the provided filename is safe by ensuring it does not contain any directory traversal characters or null bytes.
      *
-     * @param file    represents the uploaded file whose filename is to be checked.
-     * @param context represents the context in which the validation is being performed.
-     * @param message represents the message to be displayed if the filename is not safe.
-     * @return true if the filename is safe, false otherwise.
+     * @param file represents the uploaded file whose filename is to be checked.
      */
-    private boolean isSafeFilename(MultipartFile file, ConstraintValidatorContext context, String message) {
+    private void validateSafeFilename(MultipartFile file) {
         String filename = file.getOriginalFilename();
+        String message = this.resolveMessage(annotation.unsafeFilenameMessage(), properties.getMessages().getUnsafeFilenameMessage());
 
         if (!StringUtils.hasText(filename)) {
-            return this.addViolation(context, message);
+            throw new SecureFileValidationException(message);
         }
 
         String normalized = filename.replace('\\', '/');
 
         if (normalized.contains("/") || normalized.equals(".") || normalized.equals("..") || normalized.contains("\0")) {
-            return this.addViolation(context, message);
+            throw new SecureFileValidationException(message);
         }
-
-        return true;
     }
 
     /**
      * Validates the extension of the uploaded file against the allowed extensions.
      *
-     * @param file              represents the uploaded file to be validated.
-     * @param context           represents the context in which the validation is being performed.
-     * @param allowedExtensions represents the array of allowed extensions for the file.
-     * @param message           represents the message to be displayed if the file's extension is not allowed.
-     * @return true if the file's extension is valid, false otherwise.
+     * @param file represents the uploaded file to be validated.
      */
-    private boolean isValidExtension(MultipartFile file, ConstraintValidatorContext context, String[] allowedExtensions, String message) {
+    private void validateExtension(MultipartFile file) {
+        String[] allowedExtensions = annotation.allowedExtensions();
         if (allowedExtensions == null || allowedExtensions.length == 0) {
-            return true;
+            return;
         }
 
+        String message = this.resolveMessage(annotation.invalidExtensionMessage(), properties.getMessages().getInvalidExtension());
         String fileName = file.getOriginalFilename();
 
         if (!StringUtils.hasText(fileName)) {
-            return this.addViolation(context, message);
+            throw new SecureFileValidationException(message);
         }
 
         String fileExtension = StringUtils.getFilenameExtension(fileName);
 
         if (fileExtension == null) {
-            return this.addViolation(context, message);
+            throw new SecureFileValidationException(message);
         }
 
         for (String allowedExtension : allowedExtensions) {
             if (allowedExtension.equalsIgnoreCase(fileExtension)) {
-                return true;
+                return;
             }
         }
 
-        return this.addViolation(context, message);
-    }
-
-    /**
-     * Adds a violation message to the constraint validator context and disables the default violation.
-     *
-     * @param context represents the context in which the validation is being performed.
-     * @param message represents the message to be added as a violation.
-     * @return false to indicate that the validation has failed.
-     */
-    private boolean addViolation(ConstraintValidatorContext context, String message) {
-        context.disableDefaultConstraintViolation();
-        context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
-
-        return false;
+        throw new SecureFileValidationException(message);
     }
 
     /**
