@@ -6,6 +6,8 @@ import io.github.rawkfx.secure_file_validator.properties.SecureFileValidatorProp
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.apache.tika.Tika;
+import org.springframework.http.InvalidMediaTypeException;
+import org.springframework.http.MediaType;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,6 +34,17 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
     @Override
     public void initialize(SecureFile annotation) {
         this.annotation = annotation;
+
+        // Validate the developer's configured MIME types immediately
+        for (String mimeType : annotation.allowedMimeTypes()) {
+            try {
+                MediaType.parseMediaType(mimeType);
+            } catch (InvalidMediaTypeException e) {
+                throw new IllegalArgumentException(
+                        "Invalid MIME type format configured in annotation: '" + mimeType + "'", e
+                );
+            }
+        }
     }
 
     @Override

@@ -8,9 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7c4f542-8909-46b8-a4c6-41a90d842f07" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/properties/SecureFileValidatorProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/properties/SecureFileValidatorProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/validator/SecureFileValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/validator/SecureFileValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +95,7 @@
     "Spring Boot.SecureFileValidatorBoot.executor": "Run",
     "code.cleanup.on.save": "true",
     "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Proiecte git/secure-file-validator",
     "node.js.detected.package.eslint": "true",
@@ -166,7 +164,7 @@
       <workItem from="1791199042031" duration="7668000" />
       <workItem from="1791266706785" duration="1422000" />
       <workItem from="1791796168436" duration="9209000" />
-      <workItem from="1791895976119" duration="1891000" />
+      <workItem from="1791895976119" duration="2661000" />
     </task>
     <servers />
   </component>
