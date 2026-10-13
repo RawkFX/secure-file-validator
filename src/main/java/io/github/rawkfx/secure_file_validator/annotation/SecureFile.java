@@ -15,7 +15,7 @@ public @interface SecureFile {
 
     String message() default "Invalid file.";
 
-    long maxSizeMb() default 50;
+    long maxSize() default 50;
 
     String[] allowedMimeTypes() default {};
 

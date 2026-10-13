@@ -1,8 +1,11 @@
 # Secure File Validator
 
-Secure File Validator is a Spring Boot validation utility for file uploads. It helps prevent unsafe or invalid files from entering your application by checking whether a file is present, not empty, within the allowed size, has a safe filename, and matches the allowed MIME type and extension.
+Secure File Validator is a Spring Boot validation utility for file uploads. It helps prevent unsafe or invalid files
+from entering your application by checking whether a file is present, not empty, within the allowed size, has a safe
+filename, and matches the allowed MIME type and extension.
 
 Why use it?
+
 - Basic validation for upload forms and REST endpoints.
 - Protection against empty or missing files.
 - Protection against oversized uploads.
@@ -11,12 +14,14 @@ Why use it?
 - Supports custom validation messages without changing Java code.
 
 How it works
+
 - Add the annotation `@SecureFile` to a `MultipartFile` field or parameter.
-- Configure basic rules such as `required`, `maxSizeMb`, `allowedMimeTypes`, and `allowedExtensions`.
+- Configure basic rules such as `required`, `maxSize`, `allowedMimeTypes`, and `allowedExtensions`.
 - Spring Validation processes the annotation automatically.
 - The validator uses Apache Tika to detect the MIME type of the uploaded file.
 
 Example usage
+
 ```java
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +31,7 @@ import tools.secure_file_validator.boot.annotation.SecureFile;
 public class UploadRequest {
 
     @SecureFile(
-        maxSizeMb = 10,
+        maxSize = 10,
         allowedMimeTypes = {"image/png", "application/pdf"},
         allowedExtensions = {"png", "pdf"}
     )
@@ -44,6 +49,7 @@ public class UploadController {
 ```
 
 The library also supports per-field override messages directly on the annotation:
+
 - `message`
 - `requiredMessage`
 - `unsafeFilenameMessage`
@@ -58,6 +64,7 @@ Configurable messages in the application properties file
 The project exposes default validation messages under the `secure-file-validator.messages` prefix.
 
 Example `application.yaml`
+
 ```yaml
 secure-file-validator:
   messages:
@@ -70,6 +77,7 @@ secure-file-validator:
 ```
 
 Equivalent `application.properties`
+
 ```properties
 secure-file-validator.messages.required=A file is required.
 secure-file-validator.messages.unsafeFilenameMessage=The file name contains unsafe characters.
@@ -80,14 +88,16 @@ secure-file-validator.messages.invalidExtension=This file extension is not allow
 ```
 
 These messages correspond to the built-in validation rules:
+
 - `required`: no file was uploaded when the field is required
 - `unsafeFilenameMessage`: filename contains forbidden path characters or traversal patterns
 - `empty`: file is present but empty
-- `tooLarge`: file size exceeds `maxSizeMb`
+- `tooLarge`: file size exceeds `maxSize`
 - `invalidMimeType`: detected MIME type is not permitted
 - `invalidExtension`: file extension is not permitted
 
 Notes
+
 - Annotation-level messages take priority over property-based messages.
 - If you keep the annotation values empty, the app property defaults are used automatically.
 - This repository currently targets Spring Boot 2.x kept on the `2.x` branch.
