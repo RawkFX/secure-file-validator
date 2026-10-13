@@ -16,11 +16,11 @@ public class SecureFileValidatorProperties {
 
     public static class Messages {
         private String required = "File is required.";
-        private String unsafeFilenameMessage = "Filename contains unsafe characters.";
-        private String empty = "File must not be empty.";
-        private String tooLarge = "File exceeds the maximum allowed size.";
-        private String invalidMimeType = "File MIME type is not allowed.";
-        private String invalidExtension = "File extension is not allowed.";
+        private String unsafeFilenameMessage = "Filename '{filename}' contains unsafe characters.";
+        private String empty = "File '{filename}' must not be empty.";
+        private String tooLarge = "File '{filename}' exceeds the maximum allowed size.";
+        private String invalidMimeType = "File '{filename}' MIME type is not allowed.";
+        private String invalidExtension = "File '{filename}' extension is not allowed.";
 
         public String getRequired() {
             return required;

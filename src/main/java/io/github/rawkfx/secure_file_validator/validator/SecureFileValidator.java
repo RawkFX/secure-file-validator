@@ -67,8 +67,8 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
         }
 
         String message = (isNull)
-                ? this.resolveMessage(annotation.requiredMessage(), properties.getMessages().getRequired())
-                : this.resolveMessage(annotation.emptyMessage(), properties.getMessages().getEmpty());
+                ? this.resolveMessage(annotation.requiredMessage(), properties.getMessages().getRequired(), null)
+                : this.resolveMessage(annotation.emptyMessage(), properties.getMessages().getEmpty(), null);
 
         throw new SecureFileValidationException(message);
     }
@@ -82,7 +82,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
         long maxSizeBytes = annotation.maxSize() * 1024 * 1024;
 
         if (file.getSize() > maxSizeBytes) {
-            String message = this.resolveMessage(annotation.tooLargeMessage(), properties.getMessages().getTooLarge());
+            String message = this.resolveMessage(annotation.tooLargeMessage(), properties.getMessages().getTooLarge(), file);
             throw new SecureFileValidationException(message);
         }
     }
@@ -98,7 +98,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
             return;
         }
 
-        String message = this.resolveMessage(annotation.invalidMimeTypeMessage(), properties.getMessages().getInvalidMimeType());
+        String message = this.resolveMessage(annotation.invalidMimeTypeMessage(), properties.getMessages().getInvalidMimeType(), file);
 
         try (InputStream inputStream = file.getInputStream()) {
             String mimeType = tika.detect(inputStream);
@@ -122,7 +122,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
      */
     private void validateSafeFilename(MultipartFile file) {
         String filename = file.getOriginalFilename();
-        String message = this.resolveMessage(annotation.unsafeFilenameMessage(), properties.getMessages().getUnsafeFilenameMessage());
+        String message = this.resolveMessage(annotation.unsafeFilenameMessage(), properties.getMessages().getUnsafeFilenameMessage(), file);
 
         if (!StringUtils.hasText(filename)) {
             throw new SecureFileValidationException(message);
@@ -146,7 +146,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
             return;
         }
 
-        String message = this.resolveMessage(annotation.invalidExtensionMessage(), properties.getMessages().getInvalidExtension());
+        String message = this.resolveMessage(annotation.invalidExtensionMessage(), properties.getMessages().getInvalidExtension(), file);
         String fileName = file.getOriginalFilename();
 
         if (!StringUtils.hasText(fileName)) {
@@ -173,11 +173,23 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
      *
      * @param annotationMessage represents the message specified in the annotation.
      * @param defaultMessage    represents the default message specified in the application properties.
+     * @param file              represents the uploaded file to be validated.
      * @return the resolved message to be used for validation.
      */
-    private String resolveMessage(String annotationMessage, String defaultMessage) {
+    private String resolveMessage(String annotationMessage, String defaultMessage, MultipartFile file) {
         return annotationMessage == null || annotationMessage.trim().isEmpty()
-                ? defaultMessage
-                : annotationMessage;
+                ? this.formatMessage(defaultMessage, file)
+                : this.formatMessage(annotationMessage, file);
+    }
+
+    /**
+     * Replaces the "{filename}" placeholder with the actual file name.
+     */
+    private String formatMessage(String messageTemplate, MultipartFile file) {
+        String filename = (file != null && file.getOriginalFilename() != null)
+                ? file.getOriginalFilename()
+                : "unknown";
+
+        return messageTemplate.replace("{filename}", filename);
     }
 }

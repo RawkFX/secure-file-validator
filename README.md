@@ -24,6 +24,7 @@ Example usage
 
 ```java
 import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tools.secure_file_validator.boot.annotation.SecureFile;
@@ -31,9 +32,9 @@ import tools.secure_file_validator.boot.annotation.SecureFile;
 public class UploadRequest {
 
     @SecureFile(
-        maxSize = 10,
-        allowedMimeTypes = {"image/png", "application/pdf"},
-        allowedExtensions = {"png", "pdf"}
+            maxSize = 10,
+            allowedMimeTypes = {"image/png", "application/pdf"},
+            allowedExtensions = {"png", "pdf"}
     )
     private MultipartFile file;
 }
@@ -69,22 +70,22 @@ Example `application.yaml`
 secure-file-validator:
   messages:
     required: "A file is required."
-    unsafeFilenameMessage: "The file name contains unsafe characters."
-    empty: "The uploaded file is empty."
-    tooLarge: "The file exceeds the maximum allowed size."
-    invalidMimeType: "This file type is not allowed."
-    invalidExtension: "This file extension is not allowed."
+    unsafeFilenameMessage: "The file '{filename}' contains unsafe characters."
+    empty: "The uploaded file '{filename}' is empty."
+    tooLarge: "The file '{filename}' exceeds the maximum allowed size."
+    invalidMimeType: "This file '{filename}' MIME type is not allowed."
+    invalidExtension: "This file '{filename}' extension is not allowed."
 ```
 
 Equivalent `application.properties`
 
 ```properties
 secure-file-validator.messages.required=A file is required.
-secure-file-validator.messages.unsafeFilenameMessage=The file name contains unsafe characters.
-secure-file-validator.messages.empty=The uploaded file is empty.
-secure-file-validator.messages.tooLarge=The file exceeds the maximum allowed size.
-secure-file-validator.messages.invalidMimeType=This file type is not allowed.
-secure-file-validator.messages.invalidExtension=This file extension is not allowed.
+secure-file-validator.messages.unsafeFilenameMessage=The file '{filename}' contains unsafe characters.
+secure-file-validator.messages.empty=The uploaded file '{filename}' is empty.
+secure-file-validator.messages.tooLarge=The file '{filename}' exceeds the maximum allowed size.
+secure-file-validator.messages.invalidMimeType=This file '{filename}' MIME type is not allowed.
+secure-file-validator.messages.invalidExtension=This file '{filename}' extension is not allowed.
 ```
 
 These messages correspond to the built-in validation rules:
