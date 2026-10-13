@@ -25,23 +25,29 @@ Example usage
 ```java
 import javax.validation.Valid;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import tools.secure_file_validator.boot.annotation.SecureFile;
 
-public class UploadRequest {
-
+public class UploadRequestDTO {
     @SecureFile(
             maxSize = 10,
             allowedMimeTypes = {"image/png", "application/pdf"},
             allowedExtensions = {"png", "pdf"}
     )
     private MultipartFile file;
+
+    // Example of a list of files with the same validation rules
+    private List<@SecureFile(
+            maxSize = 5,
+            allowedMimeTypes = {"image/jpeg"},
+            allowedExtensions = {"jpg", "jpeg"}) MultipartFile> additionalFiles;
 }
 
 @RestController
+@Validated
 public class UploadController {
-
     @PostMapping("/upload")
     public String upload(@Valid @ModelAttribute UploadRequest request) {
         return "OK";
