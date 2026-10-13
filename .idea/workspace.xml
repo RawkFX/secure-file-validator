@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackgroundAgentGlobalSettings">
+    <option name="selectedModelId" value="auto" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a7c4f542-8909-46b8-a4c6-41a90d842f07" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/validator/SecureFileValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/validator/SecureFileValidator.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_D:/Proiecte git/secure-file-validator" value="3KdMQw7VDvDjjNxSjJzODqcIwvQ" />
+      <entry key="_D:/Proiecte git/tools/secure-file-validator/boot" value="3KHCxKV9sbIJcTl6krS9b1pKy2m" />
+    </persistenceIdMap>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="GitHub Workflow" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="3KGzBy5fDOZTVVxYc6tuLuZFB98" />
+  <component name="ProjectSessionTemplates">
+    <option name="panelTemplate">
+      <template>
+        <option name="modeId" value="Agent" />
+        <option name="model">
+          <model>
+            <option name="modelType" value="builtin_id" />
+            <option name="modelValue" value="auto" />
+          </model>
+        </option>
+        <option name="targetType" value="BACKGROUND" />
+        <option name="worktreeMode" value="WORKSPACE" />
+      </template>
+    </option>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.boot [clean].executor": "Run",
+    "Maven.boot [package].executor": "Run",
+    "Maven.boot [verify].executor": "Run",
+    "Maven.secure-file-validator [clean].executor": "Run",
+    "Maven.secure-file-validator [install].executor": "Run",
+    "Maven.secure_file_validator [clean].executor": "Run",
+    "Maven.secure_file_validator [compile].executor": "Run",
+    "Maven.secure_file_validator [install].executor": "Run",
+    "Maven.secure_file_validator [package].executor": "Run",
+    "Maven.secure_file_validator [test].executor": "Run",
+    "Maven.secure_file_validator [validate].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.BootApplication.executor": "Run",
+    "Spring Boot.SecureFileValidatorBoot.executor": "Run",
+    "code.cleanup.on.save": "true",
+    "copilot.chat.legacySessionMetadata.migrated": "true",
+    "git-widget-placeholder": "2.x-dev",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Proiecte git/secure-file-validator",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Proiecte git\tools\secure-file-validator\boot" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Proiecte git\tools\secure-file-validator\boot\src\main\java\tools\secure-file-validator\boot" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="SecureFileValidatorBoot" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="boot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="tools.secure_file_validator.boot.SecureFileValidatorBoot" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SecureFileValidatorBoot" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="boot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.rawkfx.secure_file_validator.SecureFileValidatorBoot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.github.rawkfx.secure_file_validator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.SecureFileValidatorBoot" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a7c4f542-8909-46b8-a4c6-41a90d842f07" name="Changes" comment="" />
+      <created>1791198574731</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1791198574731</updated>
+      <workItem from="1791198574795" duration="434000" />
+      <workItem from="1791199042031" duration="7668000" />
+      <workItem from="1791266706785" duration="1422000" />
+      <workItem from="1791796168436" duration="9209000" />
+      <workItem from="1791895976119" duration="2848000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
