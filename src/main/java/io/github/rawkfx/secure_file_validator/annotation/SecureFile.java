@@ -1,8 +1,8 @@
 package io.github.rawkfx.secure_file_validator.annotation;
 
+import io.github.rawkfx.secure_file_validator.validator.SecureFileValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import io.github.rawkfx.secure_file_validator.validator.SecureFileValidator;
 
 import java.lang.annotation.*;
 
@@ -15,7 +15,7 @@ public @interface SecureFile {
 
     String message() default "Invalid file.";
 
-    long maxSizeMb() default 50;
+    long maxSize() default 50;
 
     String[] allowedMimeTypes() default {};
 
