@@ -8,9 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7c4f542-8909-46b8-a4c6-41a90d842f07" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/validator/SecureFileValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/validator/SecureFileValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/handler/SecureFileExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/handler/SecureFileExceptionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +105,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "actions.on.save",
@@ -166,6 +167,7 @@
       <workItem from="1791266706785" duration="1422000" />
       <workItem from="1791796168436" duration="9209000" />
       <workItem from="1791895976119" duration="2848000" />
+      <workItem from="1791976593231" duration="2382000" />
     </task>
     <servers />
   </component>

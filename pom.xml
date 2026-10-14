@@ -10,7 +10,7 @@
     </parent>
     <groupId>io.github.rawkfx</groupId>
     <artifactId>secure_file_validator</artifactId>
-    <version>2.7.18-RC1.2</version>
+    <version>2.7.18-SNAPSHOT</version>
     <name>Secure File Validator</name>
     <description>A tool for validating the uploaded files integrity.</description>
     <dependencies>
