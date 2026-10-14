@@ -3,6 +3,8 @@ package io.github.rawkfx.secure_file_validator.handler;
 import io.github.rawkfx.secure_file_validator.exception.SecureFileValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ValidationException;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestControllerAdvice
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class SecureFileExceptionHandler {
 
     /**
