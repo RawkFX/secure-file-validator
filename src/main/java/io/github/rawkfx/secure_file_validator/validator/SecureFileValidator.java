@@ -62,6 +62,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
         this.validateSafeFilename(file);
         this.validateSize(file);
         this.validateMimeType(file);
+        this.validateDeclaredMimeType(file);
         this.validateExtension(file);
 
         // If no exceptions were thrown during the checks, the file is valid
@@ -126,6 +127,47 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
         } catch (Exception e) {
             throw new SecureFileValidationException(message);
         }
+    }
+
+    /**
+     * Validates the MIME type declared in the multipart request headers.
+     *
+     * @param file represents the uploaded file to be validated.
+     */
+    private void validateDeclaredMimeType(MultipartFile file) throws SecureFileValidationException {
+        String[] allowedMimeTypes = annotation.allowedMimeTypes();
+
+        if (allowedMimeTypes == null || allowedMimeTypes.length == 0) {
+            return;
+        }
+
+        String declaredMimeType = file.getContentType();
+
+        String message = this.resolveMessage(
+                annotation.invalidMimeTypeMessage(),
+                properties.getMessages().getInvalidMimeType(),
+                file
+        );
+
+        if (!StringUtils.hasText(declaredMimeType) || declaredMimeType == null) {
+            throw new SecureFileValidationException(message);
+        }
+
+        try {
+            MediaType declaredMediaType = MediaType.parseMediaType(declaredMimeType);
+
+            for (String allowedMimeType : allowedMimeTypes) {
+                MediaType allowedMediaType = MediaType.parseMediaType(allowedMimeType);
+
+                if (allowedMediaType.isCompatibleWith(declaredMediaType)) {
+                    return;
+                }
+            }
+        } catch (InvalidMediaTypeException e) {
+            throw new SecureFileValidationException(message);
+        }
+
+        throw new SecureFileValidationException(message);
     }
 
     /**
