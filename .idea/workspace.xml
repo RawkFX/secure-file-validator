@@ -8,10 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a7c4f542-8909-46b8-a4c6-41a90d842f07" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/handler/SecureFileExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/handler/SecureFileExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/validator/SecureFileValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/rawkfx/secure_file_validator/validator/SecureFileValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +20,7 @@
   </component>
   <component name="CopilotPersistence">
     <persistenceIdMap>
+      <entry key="_/Users/razvanpirvan/Work/secure-file-validator" value="3KGzBy5fDOZTVVxYc6tuLuZFB98" />
       <entry key="_D:/Proiecte git/secure-file-validator" value="3KdMQw7VDvDjjNxSjJzODqcIwvQ" />
       <entry key="_D:/Proiecte git/tools/secure-file-validator/boot" value="3KHCxKV9sbIJcTl6krS9b1pKy2m" />
     </persistenceIdMap>
@@ -45,6 +46,65 @@
         <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000000001237976" />
+      <entry key="S60" value="1.0000132886753537" />
+      <entry key="M2" value="1.0058416600651194" />
+      <entry key="M5" value="1.2991670535930326" />
+      <entry key="M10" value="2.1965826631803695" />
+      <entry key="M15" value="2.917690696777733" />
+      <entry key="M30" value="4.088697721867899" />
+      <entry key="H1" value="4.927317740158513" />
+      <entry key="H2" value="5.430611227788956" />
+      <entry key="H4" value="5.706515086501457" />
+      <entry key="D1" value="5.949817253593222" />
+      <entry key="W1" value="5.992799326805968" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="2.1908475722505207E-174" />
+      <entry key="S5" value="3.4520586959771366E-70" />
+      <entry key="S10" value="2.0244661827367773E-35" />
+      <entry key="S30" value="4.652615729312367E-12" />
+      <entry key="S60" value="4.043683129883011E-6" />
+      <entry key="M2" value="0.004218120357071333" />
+      <entry key="M5" value="0.28951107220969624" />
+      <entry key="M10" value="1.199370895689386" />
+      <entry key="M15" value="1.9289396277496296" />
+      <entry key="M30" value="3.1044878817481636" />
+      <entry key="H1" value="3.939501380565846" />
+      <entry key="H2" value="4.4380882295820445" />
+      <entry key="H4" value="4.710646788192852" />
+      <entry key="D1" value="4.950564880814487" />
+      <entry key="W1" value="4.992907636233448" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9012504626108302" />
+      <entry key="MS500" value="0.9794202975869268" />
+      <entry key="S2" value="0.9948148855014217" />
+      <entry key="S5" value="0.9979227189990506" />
+      <entry key="S10" value="0.998960819551523" />
+      <entry key="S30" value="0.9996534865875286" />
+      <entry key="S60" value="0.9998439629818693" />
+      <entry key="M2" value="1.0099253718383565" />
+      <entry key="M5" value="1.5873268247441266" />
+      <entry key="M10" value="3.393174557557711" />
+      <entry key="M15" value="4.843640333040661" />
+      <entry key="M30" value="7.190766681680827" />
+      <entry key="H1" value="8.865279333428242" />
+      <entry key="H2" value="9.867830586070019" />
+      <entry key="H4" value="10.416700333977568" />
+      <entry key="D1" value="10.900301229699018" />
+      <entry key="W1" value="10.98569530478196" />
+    </decayedShown>
   </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
@@ -85,6 +145,7 @@
     "Maven.secure_file_validator [package].executor": "Run",
     "Maven.secure_file_validator [test].executor": "Run",
     "Maven.secure_file_validator [validate].executor": "Run",
+    "Maven.secure_file_validator [verify].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -96,10 +157,13 @@
     "Spring Boot.BootApplication.executor": "Run",
     "Spring Boot.SecureFileValidatorBoot.executor": "Run",
     "code.cleanup.on.save": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "copilot.chat.legacySessionMetadata.migrated": "true",
     "git-widget-placeholder": "2.x-dev",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Proiecte git/secure-file-validator",
+    "last_opened_file_path": "/Users/razvanpirvan/Work/secure-file-validator",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -109,6 +173,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "actions.on.save",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -150,8 +215,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
+        <option value="bundled-jdk-30f59d01ecdd-63390994e64e-intellij.indexing.shared.core-IU-262.8665.258" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.8665.258" />
       </set>
     </attachedChunks>
   </component>
