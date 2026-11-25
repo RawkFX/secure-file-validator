@@ -62,6 +62,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
         this.validateSafeFilename(file);
         this.validateSize(file);
         this.validateMimeType(file);
+        this.validateDeclaredMimeType(file);
         this.validateExtension(file);
 
         // If no exceptions were thrown during the checks, the file is valid
@@ -74,7 +75,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
      *
      * @param isNull true if the file is completely null, false if it is just empty.
      */
-    private void handleMissingFile(boolean isNull) {
+    private void handleMissingFile(boolean isNull) throws SecureFileValidationException {
         if (!annotation.required()) {
             return;
         }
@@ -91,7 +92,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
      *
      * @param file represents the uploaded file to be validated.
      */
-    private void validateSize(MultipartFile file) {
+    private void validateSize(MultipartFile file) throws SecureFileValidationException {
         long maxSizeBytes = annotation.maxSize() * 1024 * 1024;
 
         if (file.getSize() > maxSizeBytes) {
@@ -105,7 +106,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
      *
      * @param file represents the uploaded file to be validated.
      */
-    private void validateMimeType(MultipartFile file) {
+    private void validateMimeType(MultipartFile file) throws SecureFileValidationException {
         String[] allowedMimeTypes = annotation.allowedMimeTypes();
         if (allowedMimeTypes == null || allowedMimeTypes.length == 0) {
             return;
@@ -129,15 +130,56 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
     }
 
     /**
+     * Validates the MIME type declared in the multipart request headers.
+     *
+     * @param file represents the uploaded file to be validated.
+     */
+    private void validateDeclaredMimeType(MultipartFile file) throws SecureFileValidationException {
+        String[] allowedMimeTypes = annotation.allowedMimeTypes();
+
+        if (allowedMimeTypes == null || allowedMimeTypes.length == 0) {
+            return;
+        }
+
+        String declaredMimeType = file.getContentType();
+
+        String message = this.resolveMessage(
+                annotation.invalidMimeTypeMessage(),
+                properties.getMessages().getInvalidMimeType(),
+                file
+        );
+
+        if (!StringUtils.hasText(declaredMimeType) || declaredMimeType == null) {
+            throw new SecureFileValidationException(message);
+        }
+
+        try {
+            MediaType declaredMediaType = MediaType.parseMediaType(declaredMimeType);
+
+            for (String allowedMimeType : allowedMimeTypes) {
+                MediaType allowedMediaType = MediaType.parseMediaType(allowedMimeType);
+
+                if (allowedMediaType.isCompatibleWith(declaredMediaType)) {
+                    return;
+                }
+            }
+        } catch (InvalidMediaTypeException e) {
+            throw new SecureFileValidationException(message);
+        }
+
+        throw new SecureFileValidationException(message);
+    }
+
+    /**
      * Checks if the provided filename is safe by ensuring it does not contain any directory traversal characters or null bytes.
      *
      * @param file represents the uploaded file whose filename is to be checked.
      */
-    private void validateSafeFilename(MultipartFile file) {
+    private void validateSafeFilename(MultipartFile file) throws SecureFileValidationException {
         String filename = file.getOriginalFilename();
         String message = this.resolveMessage(annotation.unsafeFilenameMessage(), properties.getMessages().getUnsafeFilenameMessage(), file);
 
-        if (!StringUtils.hasText(filename)) {
+        if (!StringUtils.hasText(filename) || filename == null) {
             throw new SecureFileValidationException(message);
         }
 
@@ -153,7 +195,7 @@ public class SecureFileValidator implements ConstraintValidator<SecureFile, Mult
      *
      * @param file represents the uploaded file to be validated.
      */
-    private void validateExtension(MultipartFile file) {
+    private void validateExtension(MultipartFile file) throws SecureFileValidationException {
         String[] allowedExtensions = annotation.allowedExtensions();
         if (allowedExtensions == null || allowedExtensions.length == 0) {
             return;
